@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{--dark:#252522;--cream:#f3f0e8;--muted:#aaa69b;--line:#d7d2c7}
 *{box-sizing:border-box}
@@ -51,19 +52,30 @@ form button{background:var(--cream);color:var(--dark);border:0;padding:19px;font
 #status{font-size:13px;line-height:1.6;color:#d8d1bd}
 footer{padding:30px 7%;display:flex;justify-content:space-between;gap:20px;font-size:10px;letter-spacing:1.5px;color:#77736a}
 @media(max-width:750px){
-header{padding:0 6%;height:68px}nav{gap:13px;font-size:9px}
-.hero{grid-template-columns:1fr}.hero-copy{padding:90px 9% 70px}.hero-image{min-height:390px}
-section{padding:75px 7%}.section-top{display:block}.services{grid-template-columns:1fr;gap:15px}
-.about{grid-template-columns:1fr;gap:35px}.about-image{height:390px}
+header{padding:0 6%;height:68px}
+nav{gap:13px;font-size:9px}
+.hero{grid-template-columns:1fr}
+.hero-copy{padding:90px 9% 70px}
+.hero-image{min-height:390px}
+section{padding:75px 7%}
+.section-top{display:block}
+.services{grid-template-columns:1fr;gap:15px}
+.about{grid-template-columns:1fr;gap:35px}
+.about-image{height:390px}
 .booking-wrap{grid-template-columns:1fr;gap:45px}
 footer{flex-direction:column}
 }
 </style>
 </head>
+
 <body>
 <header>
 <a class="logo" href="#">HOLY BROWS</a>
-<nav><a href="#services">Услуги</a><a href="#about">О студии</a><a href="#booking">Запись</a></nav>
+<nav>
+<a href="#services">Услуги</a>
+<a href="#about">О студии</a>
+<a href="#booking">Запись</a>
+</nav>
 </header>
 
 <main>
@@ -79,13 +91,32 @@ footer{flex-direction:column}
 
 <section id="services">
 <div class="section-top">
-<div><div class="small">01 / Our services</div><h2>Услуги</h2></div>
+<div>
+<div class="small">01 / Our services</div>
+<h2>Услуги</h2>
+</div>
 <div class="small">Красота начинается с деталей</div>
 </div>
+
 <div class="services">
-<div class="service"><div class="small">01 — Shape</div><h3>Коррекция бровей</h3><p>Аккуратная форма с учётом особенностей лица.</p><div class="price">ОТ  —  000 ₽</div></div>
-<div class="service"><div class="small">02 — Color</div><h3>Окрашивание</h3><p>Естественный оттенок и выразительный результат.</p><div class="price">ОТ  —  000 ₽</div></div>
-<div class="service"><div class="small">03 — Care</div><h3>Комплекс</h3><p>Коррекция и окрашивание для завершённого образа.</p><div class="price">ОТ  —  000 ₽</div></div>
+<div class="service">
+<div class="small">01 — Shape</div>
+<h3>Коррекция бровей</h3>
+<p>Аккуратная форма с учётом особенностей лица.</p>
+<div class="price">ОТ — 000 ₽</div>
+</div>
+<div class="service">
+<div class="small">02 — Color</div>
+<h3>Окрашивание</h3>
+<p>Естественный оттенок и выразительный результат.</p>
+<div class="price">ОТ — 000 ₽</div>
+</div>
+<div class="service">
+<div class="small">03 — Care</div>
+<h3>Комплекс</h3>
+<p>Коррекция и окрашивание для завершённого образа.</p>
+<div class="price">ОТ — 000 ₽</div>
+</div>
 </div>
 </section>
 
@@ -106,42 +137,73 @@ footer{flex-direction:column}
 <h2>Твоя запись<br>начинается здесь.</h2>
 <p>Оставь свои контакты и выбери услугу. Мы получим заявку и свяжемся с тобой для подтверждения времени.</p>
 </div>
+
 <form id="bookingForm">
 <input name="name" placeholder="Твоё имя" required>
 <input name="phone" placeholder="Телефон или Telegram" required>
+
 <select name="service" required>
 <option value="">Выбери услугу</option>
 <option>Коррекция бровей</option>
 <option>Окрашивание бровей</option>
 <option>Комплекс</option>
 </select>
+
 <input name="date" type="date" aria-label="Желаемая дата">
-<textarea name="comment" placeholder="Пожелания или удобное время"></textarea>
+
+<input name="time" placeholder="Желаемое время (например, 15:00)" required>
+
+<textarea name="comment" placeholder="Дополнительные пожелания (необязательно)"></textarea>
+
 <button type="submit">Отправить заявку ↗</button>
 <div id="status" aria-live="polite"></div>
 </form>
 </div>
 </section>
 </main>
-<footer><span>HOLY BROWS © 2026</span><span>BEAUTY IN EVERY DETAIL</span><a href="#booking">BOOK AN APPOINTMENT ↗</a></footer>
+
+<footer>
+<span>HOLY BROWS © 2026</span>
+<span>BEAUTY IN EVERY DETAIL</span>
+<a href="#booking">BOOK AN APPOINTMENT ↗</a>
+</footer>
 
 <script>
 const form = document.getElementById('bookingForm');
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   const status = document.getElementById('status');
-  const data = Object.fromEntries(new FormData(form).entries());
+  const formData = Object.fromEntries(new FormData(form).entries());
+
+  const data = {
+    name: formData.name,
+    phone: formData.phone,
+    service: formData.service,
+    date: formData.date || 'Не указана',
+    time: formData.time
+  };
+
   status.textContent = 'Отправляем заявку...';
+
   try {
     const response = await fetch('https://holy-brows-studio.onrender.com/api/booking', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     });
-    if (!response.ok) throw new Error('Ошибка отправки');
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Ошибка отправки');
+    }
+
     status.textContent = 'Заявка отправлена! Мы скоро свяжемся с тобой.';
     form.reset();
+
   } catch (error) {
+    console.error('Booking error:', error);
     status.textContent = 'Не удалось отправить заявку. Попробуй позже или свяжись с нами напрямую.';
   }
 });
